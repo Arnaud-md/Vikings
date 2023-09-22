@@ -1,4 +1,4 @@
-import { Combat } from "./Combat"
+import { Combat } from "./Combats/Combat"
 import { Viking } from "./Personnage"
 import { Arme } from "./Arme"
 const viking1 = new Viking('viking1', 48, 48, 12, new Arme('Lame du roi déçu', 10), 6)
