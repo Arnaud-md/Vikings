@@ -16,6 +16,12 @@ export class TypePersonnage {
         this._manaBonus=manaBonus;
         this._critiqueBonus=critiqueBonus;
     }
+    public get nomType():string {
+        return this._nomType;
+    }
+    public set nomType(nomType:string) {
+        this._nomType=nomType;
+    }
     public santeBonus(): number {
         return this._vieBonus;
     }

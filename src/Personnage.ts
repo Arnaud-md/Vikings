@@ -13,14 +13,18 @@ export class Personnage {
     private _vitesse: number
     private _intelligence: number
     private _pointsMana: number
+    private _manaInitiale: number
     private _chancesCritiques: number
     //private _equipement: Equipement
+    
 
     constructor(
         //arme: Arme
+        nom: string,
+        typePersonnage: TypePersonnage
     ) {
-        this._nom = "";
-        this._typePersonnage=new TypePersonnage("",0,0,0,0,0,0);
+        this._nom = nom;
+        this._typePersonnage=typePersonnage;
         
         this.santeInitiale = 50+this._typePersonnage.santeBonus();
         this._sante = 50+this._typePersonnage.santeBonus();
@@ -32,15 +36,16 @@ export class Personnage {
         this._vitesse = 10+this._typePersonnage.vitesseBonus();
         this._intelligence = 10+this._typePersonnage.intelligenceBonus();
         this._pointsMana = 50+this._typePersonnage.manaBonus();
+        this._manaInitiale = 50+this._typePersonnage.manaBonus();
         this._chancesCritiques = 0.02+this._typePersonnage.critiqueBonus();
     }
 
-    public fight(otherPerson: Personnage) {
-        const attackValue = this.getAttackValue()
-        //const soinsValue = this.getHealedValueFromAttaque(attackValue)
-        otherPerson.receiveAttack(attackValue)
-        //this.heal(soinsValue)
-    }
+    // public fight(otherPerson: Personnage) {
+    //     const attackValue = this.getAttackValue()
+    //     //const soinsValue = this.getHealedValueFromAttaque(attackValue)
+    //     otherPerson.receiveAttack(attackValue)
+    //     //this.heal(soinsValue)
+    //}
 
      public get nom(): string {
         return this._nom;
@@ -85,6 +90,10 @@ export class Personnage {
     public set pointsMana(pointsMana:number) {
         this._pointsMana=pointsMana;
     }
+    public get manaInitiale(): number {
+        return this._manaInitiale;
+    }
+
     public get chancesCritiques(): number {
         return this._chancesCritiques;
     }
@@ -92,13 +101,9 @@ export class Personnage {
         this._chancesCritiques=chancesCritiques;
     }
 
-    private getAttackValue(): number {
-        let attackValue = this.force
-        if(Math.random() < 0.1) {
-            attackValue *= 2
-        }
-        return attackValue
-    }
+    
+
+    
 
     // private getHealedValueFromAttaque(attaqueValue: number): number {
     //     let soinsValue = 0
@@ -115,15 +120,6 @@ export class Personnage {
         }
     }
 
-    private receiveAttack(amount: number){
-        //let totalLifeToLose = amount - this.defense
-        let totalLifeToLose = amount
-        if(totalLifeToLose > 0) {
-            this.sante -= totalLifeToLose
-        }
-        if(this.sante < 0) {
-            this.sante = 0
-        }
-    }
+
 
 }

@@ -1,15 +1,10 @@
-import { TypePersonnage } from "./TypesPersonnages/TypePersonnage";
+import { TypePersonnage } from "./TypePersonnage";
 
 export class Viking extends TypePersonnage {
-    // constructor(nom :string) {
-    //     Personnage.nom =
-    // }
-    private _nomPersonnage: string
+    //private _nomPersonnage: string
     private static nomtype : string = "Viking";
-    constructor(nomPersonnage: string) {
+    constructor() {
         super(Viking.nomtype,25,4,2,0,0,0.08);
-        this._nomPersonnage=nomPersonnage;
+        //this._nomPersonnage=nomPersonnage;
     }
-
-
 }

@@ -1,9 +1,44 @@
 import { Combat } from "./Combats/Combat"
-import { Viking } from "./Personnage"
+import { Personnage } from "./Personnage"
 import { Arme } from "./Arme"
-const viking1 = new Viking('viking1', 48, 48, 12, new Arme('Lame du roi déçu', 10), 6)
-const viking2 = new Viking('viking2', 36, 39, 15, new Arme('Lame de sang', 20), 2)
+import { Viking } from "./TypesPersonnages/Viking"
+import { Archer } from "./TypesPersonnages/Archer"
+import { Chevalier } from "./TypesPersonnages/Chevalier"
+import { Magicien } from "./TypesPersonnages/Magicien"
+import { Voleur } from "./TypesPersonnages/Voleur"
+import { CombatHandler } from "./Combats/CombatHandler"
+let viking1 = new Viking();
 
-const combat = new Combat([viking1, viking2])
-combat.simulate()
-combat.afficherVainqueur()
+let ragnar = new Personnage("Ragnar",viking1);
+
+let archer1 = new Archer();
+
+let tell = new Personnage("Tell",archer1);
+
+let chevalier1 = new Chevalier();
+
+let luther = new Personnage("Luther",chevalier1);
+
+let voleur1 = new Voleur();
+
+let robin = new Personnage("Robin",voleur1);
+
+let magicien1 = new Magicien();
+
+let merlin = new Personnage("Merlin",magicien1)
+
+let combat = new CombatHandler(ragnar,tell);
+let combat2 = new CombatHandler(ragnar,luther);
+let combat3 = new CombatHandler(luther,tell);
+let combat4 = new CombatHandler(robin,merlin)
+combat4.fight();
+
+console.log(ragnar.sante);
+console.log(luther.sante);
+
+
+// const viking2 = new Viking('viking2', 36, 39, 15, new Arme('Lame de sang', 20), 2)
+
+// const combat = new Combat([viking1, viking2])
+// combat.simulate()
+// combat.afficherVainqueur()
