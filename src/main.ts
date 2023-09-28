@@ -31,6 +31,7 @@ let combat = new CombatHandler(ragnar,tell);
 let combat2 = new CombatHandler(ragnar,luther);
 let combat3 = new CombatHandler(luther,tell);
 let combat4 = new CombatHandler(robin,merlin)
+let combat5 = new CombatHandler(luther,ragnar);
 combat4.fight();
 
 console.log(ragnar.sante);

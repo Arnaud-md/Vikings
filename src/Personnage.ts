@@ -4,7 +4,7 @@ export class Personnage {
 
     private _nom: string
     private _sante: number
-    private santeInitiale: number
+    private _santeInitiale: number
     private _force: number
     //private arme: Arme
     private _niveau: number
@@ -26,7 +26,7 @@ export class Personnage {
         this._nom = nom;
         this._typePersonnage=typePersonnage;
         
-        this.santeInitiale = 50+this._typePersonnage.santeBonus();
+        this._santeInitiale = 50+this._typePersonnage.santeBonus();
         this._sante = 50+this._typePersonnage.santeBonus();
         this._force = 10+this._typePersonnage.forceBonus();
         //this.arme = arme
@@ -100,6 +100,13 @@ export class Personnage {
     public set chancesCritiques(chancesCritiques:number) {
         this._chancesCritiques=chancesCritiques;
     }
+
+    public get santeInitiale(): number {
+        return this._santeInitiale;
+    }
+    public set santeInitiale(santeInitiale:number) {
+        this._santeInitiale=santeInitiale;
+    } 
 
     
 
