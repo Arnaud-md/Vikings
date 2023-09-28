@@ -8,16 +8,23 @@ export class CombatHandler {
         this._p2=p2;
     }
 
-    private getAttackValue(tabPJ:Personnage[]): [number,number] {
+    private getAttackValue(tabPJ:Personnage[]): [number,number,number] {
         let attackValue = tabPJ[0].force
+        let attackValueArcher = tabPJ[1].force;
+        console.log(tabPJ[0].nom);
+        console.log(attackValue);
         let isCoupCritique = 1;
         if (tabPJ[1].typePersonnage.nomType=="Chevalier") {
             attackValue = 0.75*attackValue;
+        }
+        if (tabPJ[0].typePersonnage.nomType=="Chevalier") {
+            attackValueArcher *= 0.75;
         }
         
         if(Math.random() < tabPJ[0].chancesCritiques) {
             if(tabPJ[0].typePersonnage.nomType!="Voleur") {
                 attackValue *= 2;
+                attackValueArcher *=2;
             }
             else {
                 attackValue *= 2.5;
@@ -28,12 +35,12 @@ export class CombatHandler {
             attackValue = 1.75*tabPJ[0].intelligence;
             tabPJ[0].pointsMana -= 35;
         }
-        return [attackValue,isCoupCritique]
+        return [attackValue,isCoupCritique,attackValueArcher]
 
     }
 
     private getAttackValueVoleur(tabPJ:Personnage[]): number {
-        let attackValue = tabPJ[0].force
+        let  attackValue = tabPJ[0].force
         let isCoupCritique = 1;
         if (tabPJ[1].typePersonnage.nomType=="Chevalier") {
             attackValue = 0.75*attackValue;
@@ -67,14 +74,14 @@ export class CombatHandler {
             tabPJ[i] = [ordrePJ[i],ordrePJ[1-i]];
             if (ordrePJ[0].sante > 0 && ordrePJ[1].sante > 0) {
                 tabAttackValue = this.getAttackValue(tabPJ[i]);
-                attackValue[i]=[tabAttackValue[0],tabAttackValue[1]];
+                attackValue[i]=[tabAttackValue[0],tabAttackValue[1],tabAttackValue[2]];
                 console.log(attackValue[i][0]);
-                this.beforeAttack(tabPJ[i],attackValue[i][0],numAttack);
+                this.beforeAttack(tabPJ[i],attackValue[i][2],numAttack);
                 //console.log(" la sante du personnage "+ordrePJ[i].nom+" de type : "+ordrePJ[i].typePersonnage.nomType+" avant combat est de : "+ordrePJ[i].sante+" et la sante du personnage "+ordrePJ[1-i].nom+" de type : "+ordrePJ[1-i].typePersonnage.nomType+" est de : "+ordrePJ[1-i].sante);
                 if(numAttack!=1 || tabPJ[i][0].typePersonnage.nomType!="Archer") {
                     
                         this.receiveAttack(tabPJ[i],attackValue[i][0]);
-                        console.log(tabPJ[i][0].nom + "inflige "+attackValue[i][0]+" points de degats");
+                        console.log(tabPJ[i][0].nom + " inflige "+attackValue[i][0]+" points de degats");
                     
                 }
                 this.afterAttack(tabPJ[i],attackValue[i][0]);
