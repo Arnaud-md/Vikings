@@ -1,14 +1,15 @@
-import { Personnage } from "../Personnage";
+import { Hero } from "../Personnage/Hero";
+import { Personnage } from "../Personnage/Personnage";
 
 export class CombatHandler {
-    private _p1: Personnage
-    private _p2: Personnage
-    constructor(p1: Personnage,p2: Personnage) {
+    private _p1: Hero
+    private _p2: Hero
+    constructor(p1: Hero,p2: Hero) {
         this._p1=p1;
         this._p2=p2;
     }
 
-    private getAttackValue(tabPJ:Personnage[]): [number,number,number] {
+    private getAttackValue(tabPJ:Hero[]): [number,number,number] {
         let attackValue = tabPJ[0].force
         let attackValueArcher = tabPJ[1].force;
         console.log(tabPJ[0].nom);
@@ -39,7 +40,7 @@ export class CombatHandler {
 
     }
 
-    private getAttackValueVoleur(tabPJ:Personnage[]): number {
+    private getAttackValueVoleur(tabPJ:Hero[]): number {
         let  attackValue = tabPJ[0].force
         let isCoupCritique = 1;
         if (tabPJ[1].typePersonnage.nomType=="Chevalier") {
@@ -53,7 +54,7 @@ export class CombatHandler {
         return attackValue
     }
 
-    private receiveAttack(tabPJ:Personnage[], amount: number){
+    private receiveAttack(tabPJ:Hero[], amount: number){
         //let totalLifeToLose = amount - this.defense
         let totalLifeToLose = amount
         if(totalLifeToLose > 0) {
@@ -64,7 +65,7 @@ export class CombatHandler {
         }
     }
 
-    private oneTurn(ordrePJ:Personnage[], numAttack:number) {
+    private oneTurn(ordrePJ:Hero[], numAttack:number) {
         let tabPJ = [];
         let  attackValue = [];
         let tabAttackValue =[];
@@ -114,7 +115,7 @@ export class CombatHandler {
         }
         this.afficheVainqueur(ordrePJ);
     }
-    private restaureMana(ordrePJ: Personnage[]){
+    private restaureMana(ordrePJ: Hero[]){
         let diffMana = 0;
         let manaRestauree = 0;
         for (let i=0;i<ordrePJ.length;i++) {
@@ -126,7 +127,7 @@ export class CombatHandler {
             }
         }
     }
-    private afficheVainqueur(ordrePJ:Personnage[]) {
+    private afficheVainqueur(ordrePJ:Hero[]) {
         for (let i=0;i<ordrePJ.length;i++) {
             if (ordrePJ[i].sante>0) {
                 console.log("le vainqueur est : "+ordrePJ[i].nom)
@@ -134,7 +135,7 @@ export class CombatHandler {
         }
     }
 
-    private beforeAttack(tabPJ:Personnage[],degatsArcher:number, numAttack:number){
+    private beforeAttack(tabPJ:Hero[],degatsArcher:number, numAttack:number){
         if (tabPJ[1].typePersonnage.nomType=="Archer") {
             if (tabPJ[1].vitesse>=tabPJ[0].vitesse) {
                 if (numAttack==1) {
@@ -145,7 +146,7 @@ export class CombatHandler {
         }
     }
 
-    private afterAttack(tabPJ:Personnage[], degats:number){
+    private afterAttack(tabPJ:Hero[], degats:number){
         const multVolVieViking = 0.15;
         const multVolManaViking = 0.03;
         if (tabPJ[0].typePersonnage.nomType=="Viking") {

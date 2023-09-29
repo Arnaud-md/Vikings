@@ -1,4 +1,4 @@
-import { Personnage } from "../Personnage"
+import { Personnage } from "../Personnage/Personnage"
 export class Combat {
 
     private _personnages: Personnage[]
